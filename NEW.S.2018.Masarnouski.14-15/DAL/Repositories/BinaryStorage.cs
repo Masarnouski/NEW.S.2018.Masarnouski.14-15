@@ -1,12 +1,12 @@
-﻿using System;
+﻿using DAL.Interfaces.DTO;
+using DAL.Interfaces.Interface;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace DAL.Repositories
 {
-    public class BinaryStorage:IStorage
+    public class BinaryStorage : IStorage
     {
         string path;
         public BinaryStorage(string path)
@@ -36,12 +36,12 @@ namespace DAL.Repositories
                 this.path = value;
             }
         }
-        public List<BankAccount> Load()
+        public List<AccountDTO> Load()
         {
             using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate))
             using (var writer = new BinaryWriter(stream))
             {
-                List<BankAccount> LoadedAccountsList = new List<BankAccount>();
+                List<AccountDTO> LoadedAccountsList = new List<AccountDTO>();
                 var reader = new BinaryReader(stream);
 
                 while (reader.PeekChar() > -1)
@@ -51,15 +51,15 @@ namespace DAL.Repositories
                     string holderSurName = reader.ReadString();
                     decimal balance = reader.ReadDecimal();
                     int bonus = reader.ReadInt32();
-                    AccountType type = (AccountType)reader.ReadInt32();
+                    int type = reader.ReadInt32();
 
-                    LoadedAccountsList.Add(new BankAccount(id, holderName, holderSurName, balance, type, bonus));
+                    LoadedAccountsList.Add(new AccountDTO(id, holderName, holderSurName, balance, bonus, type));
                 }
                 return LoadedAccountsList;
             }
         }
 
-        public void Save(List<BankAccount> accountsList)
+        public void Save(List<AccountDTO> accountsList)
         {
             using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate))
             {

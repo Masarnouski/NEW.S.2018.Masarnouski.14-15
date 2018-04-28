@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{08890CAF-F7C1-406A-A68B-C9EAA1A1B64C}</ProjectGuid>
+    <ProjectGuid>{90F31058-819D-4424-891A-F5223A5139B5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NEW.S._2018.Masarnouski._14_15</RootNamespace>
-    <AssemblyName>NEW.S.2018.Masarnouski.14-15</AssemblyName>
+    <RootNamespace>ConsolePL</RootNamespace>
+    <AssemblyName>ConsolePL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

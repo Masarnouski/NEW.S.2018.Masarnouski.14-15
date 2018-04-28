@@ -1,24 +1,29 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using BLL.Interfaces.Entities;
 using DAL.Interfaces.Interface;
 using BLL.Interfaces.Interface;
+using BLL.Mappers;
 
 namespace BLL
 {
-    public class AccountService
+    public class AccountService: IAccountService
     {
         private readonly List<BankAccount> accountsList;
         IStorage storage;
         IBonusCounter bonusCounter;
-        public AccountService(IStorageFactory storage, IBonusCounter bonusCounter)
+        AccountMapper mapper;
+
+        public AccountService(IStorage storage, IBonusCounter bonusCounter, AccountMapper mapper)
         {
+            this.mapper = mapper;
             this.storage = storage;
             this.bonusCounter = bonusCounter;
-            accountsList = storage.GetInstance().Load();
+            storage.Load().Select(m => mapper.ToBankAccount(m)) ;
         }
 
-        public void AddAccount(BankAccount account)
+        public void Add(BankAccount account)
         {
             if (ReferenceEquals(account, null))
             {
@@ -30,7 +35,7 @@ namespace BLL
                 accountsList.Add(account);
         }
 
-        public void RemoveAccount(BankAccount account)
+        public void Remove(BankAccount account)
         {
             if (ReferenceEquals(account, null))
             {
@@ -39,7 +44,6 @@ namespace BLL
             if (accountsList.Contains(account))
             {
                 accountsList.Remove(account);
-                storage.GetInstance().Save(accountsList);
             }
             else
                 throw new Exception("This account is alrady exists");
@@ -81,15 +85,14 @@ namespace BLL
             account.SetBonus(bonusCounter.GetBonusFromWithdraw(account, amount));
             account.Withdraw(amount);
         }
-        public void LoadFromStorage()
+        public List<BankAccount> Load()
         {
-            storage.GetInstance().Load();
+           return storage.Load().Select(m => mapper.ToBankAccount(m)).ToList();
         }
 
-        public void SaveToStorage()
+        public void Save()
         {
-            storage.GetInstance().Save(accountsList);
+            storage.Save(accountsList.Select(m => mapper.ToDTOAccount(m)).ToList());
         }
-
     }
 }

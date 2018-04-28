@@ -3,9 +3,9 @@ using BLL.Interfaces.Entities;
 
 namespace BLL.Mappers
 {
-    class AccountMapper
+    public class AccountMapper
     {
-        public AccountDTO ToAccount(BankAccount bankAccount)
+        public AccountDTO ToDTOAccount(BankAccount bankAccount)
         {
             return new AccountDTO()
             {

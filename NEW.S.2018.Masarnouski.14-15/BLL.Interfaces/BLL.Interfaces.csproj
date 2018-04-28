@@ -44,6 +44,7 @@
     <Compile Include="Entities\BankAccount.cs" />
     <Compile Include="Entities\BankAccountTypes.cs" />
     <Compile Include="Entities\BonusCounter.cs" />
+    <Compile Include="Interface\IAccountService.cs" />
     <Compile Include="Interface\IBonusCounter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

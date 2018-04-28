@@ -1,11 +1,13 @@
-﻿using System;
+﻿using DAL.Interfaces.DTO;
+using System;
 using System.Collections.Generic;
+
 
 namespace DAL.Interfaces.Interface
 {
     public interface IStorage
     {
-        List<BankAccount> Load();
-        void Save(List<BankAccount> accountsList);
+        List<AccountDTO> Load();
+        void Save(List<AccountDTO> accountsList);
     }
 }

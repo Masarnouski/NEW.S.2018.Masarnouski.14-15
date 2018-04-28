@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NEW.S.2018.Masarnouski.14-15")]
+[assembly: AssemblyTitle("ConsolePL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NEW.S.2018.Masarnouski.14-15")]
+[assembly: AssemblyProduct("ConsolePL")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("08890caf-f7c1-406a-a68b-c9eaa1a1b64c")]
+[assembly: Guid("90f31058-819d-4424-891a-f5223a5139b5")]
 
 // Version information for an assembly consists of the following four values:
 //
