@@ -153,6 +153,10 @@ namespace BLL.Interfaces.Entities
             }
             Balance -= amount;
         }
+        public override string ToString()
+        {
+            return $"id = {this.Id} , name = {this.HolderName}, surname = {HolderSurName}, balanse = {this.balance}, bonus points = {this.Bonus}";
+        }
         #endregion
     }
 }

@@ -6,11 +6,11 @@ using DAL.Interfaces.Interface;
 using BLL.Interfaces.Interface;
 using BLL.Mappers;
 
-namespace BLL
+namespace BLL.ServiceImplementation
 {
     public class AccountService: IAccountService
     {
-        private readonly List<BankAccount> accountsList;
+        private List<BankAccount> accountsList;
         IStorage storage;
         IBonusCounter bonusCounter;
         AccountMapper mapper;
@@ -20,7 +20,7 @@ namespace BLL
             this.mapper = mapper;
             this.storage = storage;
             this.bonusCounter = bonusCounter;
-            storage.Load().Select(m => mapper.ToBankAccount(m)) ;
+            Load();
         }
 
         public void Add(BankAccount account)
@@ -85,14 +85,22 @@ namespace BLL
             account.SetBonus(bonusCounter.GetBonusFromWithdraw(account, amount));
             account.Withdraw(amount);
         }
-        public List<BankAccount> Load()
+        public void Load()
         {
-           return storage.Load().Select(m => mapper.ToBankAccount(m)).ToList();
+           accountsList = storage.Load().Select(m => mapper.ToBankAccount(m)).ToList();
         }
 
         public void Save()
         {
             storage.Save(accountsList.Select(m => mapper.ToDTOAccount(m)).ToList());
+            accountsList.Clear();
+        }
+        public void View()
+        {
+            foreach (var item in accountsList)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

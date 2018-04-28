@@ -15,6 +15,8 @@ namespace BLL.Interfaces.Interface
 
         void Save();
 
-        List<BankAccount> LoadFromStorage();
+        void View();
+
+        void Load();
     }
 }
