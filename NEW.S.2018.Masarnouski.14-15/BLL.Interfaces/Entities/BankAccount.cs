@@ -1,8 +1,9 @@
-﻿using System;
+﻿using BLL.Interfaces.Interface;
+using System;
 
 namespace BLL.Interfaces.Entities
 {
-    public class BankAccount
+    public class BankAccount : IBankAccount
     {
         #region fields
         private int id;
@@ -21,6 +22,7 @@ namespace BLL.Interfaces.Entities
             this.holderSurName = holderSurName;
             Type = 0;
             Bonus = 0;
+            Balance = 0;
         }
         public BankAccount(int id, string holderName, string holderSurName, decimal balance) : this(id, holderName, holderSurName)
         {

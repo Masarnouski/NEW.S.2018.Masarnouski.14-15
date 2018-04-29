@@ -20,6 +20,7 @@ namespace BLL.ServiceImplementation
             this.mapper = mapper;
             this.storage = storage;
             this.bonusCounter = bonusCounter;
+            accountsList = new List<BankAccount>();
             Load();
         }
 
