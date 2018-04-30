@@ -11,30 +11,24 @@ namespace BLL.Interfaces.Entities
         private string holderName;
         private string holderSurName;
         int bonus;
+        IBonusCounter counter;
 
         #endregion
 
         #region Constructors
-        public BankAccount(int id, string holderName, string holderSurName)
+
+        public BankAccount(int id, string holderName, string holderSurName, decimal balance, AccountType type, int bonus)
         {
-            this.id = id;
-            this.holderName = holderName;
-            this.holderSurName = holderSurName;
-            Type = 0;
-            Bonus = 0;
-            Balance = 0;
-        }
-        public BankAccount(int id, string holderName, string holderSurName, decimal balance) : this(id, holderName, holderSurName)
-        {
-            this.balance = balance;
-        }
-        public BankAccount(int id, string holderName, string holderSurName, decimal balance, AccountType type) : this(id, holderName, holderSurName,balance)
-        {
+            this.Id = id;
+            this.HolderName = holderName;
+            this.HolderSurName = holderSurName;
             Type = type;
-        }
-        public BankAccount(int id, string holderName, string holderSurName, decimal balance, AccountType type, int bonus):this(id, holderName, holderSurName, balance, type)
-        {
             Bonus = bonus;
+            Balance = balance;
+        }
+        public BankAccount(int id, string holderName, string holderSurName, IBonusCounter counter, decimal balance, AccountType type, int bonus):this(id, holderName, holderSurName, balance, type,bonus)
+        { 
+            this.Counter = counter;
         }
         #endregion 
 
@@ -125,11 +119,33 @@ namespace BLL.Interfaces.Entities
                 this.bonus = value;
             }
         }
+
+        public IBonusCounter Counter {
+            get => counter;
+            set
+            {
+                if (ReferenceEquals(value,null))
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                counter = value;
+            }
+        }
         #endregion
 
         #region Methods
+        public void Fill(decimal amount)
+        {
+            SetBonus(Counter.GetBonusFromFill(this,amount));
+            FillNative(amount);
+        }
+        public void Withdraw(decimal amount)
+        {
+            SetBonus(Counter.GetBonusFromWithdraw(this, amount));
+            WithdrawNative(amount);
+        }
 
-        public void SetBonus(int bonus)
+        private void SetBonus(int bonus)
         {
             if (bonus < 0)
             {
@@ -139,7 +155,7 @@ namespace BLL.Interfaces.Entities
             Bonus += bonus;
         }
 
-        public void Fill(decimal amount)
+        private void FillNative(decimal amount)
         {
             if (amount < 0)
             {
@@ -147,17 +163,18 @@ namespace BLL.Interfaces.Entities
             }
             Balance += amount;
         }
-        public void Withdraw(decimal amount)
+        private void WithdrawNative(decimal amount)
         {
             if (amount < 0)
             {
-                throw new ArgumentException("Amount to fill must be greater or equal to 0");
+                throw new ArgumentException("Amount to withdraw must be greater or equal to 0");
             }
             Balance -= amount;
         }
         public override string ToString()
         {
-            return $"id = {this.Id} , name = {this.HolderName}, surname = {HolderSurName}, balanse = {this.balance}, bonus points = {this.Bonus}";
+            return $"id = {this.Id} , name = {this.HolderName}, surname = {HolderSurName}," +
+                $" balanse = {this.balance}, bonus points = {this.Bonus}";
         }
         #endregion
     }

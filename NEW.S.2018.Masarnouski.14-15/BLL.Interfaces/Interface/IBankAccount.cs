@@ -8,7 +8,6 @@ namespace BLL.Interfaces.Interface
 {
     interface IBankAccount
     {
-        void SetBonus(int bonus);
         void Fill(decimal amount);
         void Withdraw(decimal amount);
     }
