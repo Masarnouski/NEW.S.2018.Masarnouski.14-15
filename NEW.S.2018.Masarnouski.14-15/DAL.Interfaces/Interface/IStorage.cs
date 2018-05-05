@@ -7,7 +7,10 @@ namespace DAL.Interfaces.Interface
 {
     public interface IStorage
     {
-        List<AccountDTO> Load();
-        void Save(List<AccountDTO> accountsList);
+        void Create(AccountDTO account);
+        AccountDTO Read(int id);
+        void Update(AccountDTO account);
+        void Delete(AccountDTO account);
+        List<AccountDTO> GETLIST();
     }
 }

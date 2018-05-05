@@ -12,7 +12,7 @@ namespace ConsolePL
         static Program()
         {
             Resolver = new StandardKernel();
-            Resolver.ConfigurateResolver(); ;
+            Resolver.ConfigurateResolver(); 
         }
 
         static void Main(string[] args)
@@ -25,23 +25,22 @@ namespace ConsolePL
             BankAccount account2 = new BankAccount(generator.GenerateId(), "Alesya", "Dzehachova",counter, 200, AccountType.Gold,0);
             BankAccount account3 = new BankAccount(generator.GenerateId(), "Vitaliy", "Masarnouski",counter, 200, AccountType.Premium,0);
 
-            service.Add(account1);
-            service.Add(account2);
-            service.Add(account3);
-            
-            Console.WriteLine(account1);
-            Console.WriteLine(account2);
-            Console.WriteLine(account3);
+            service.Create(account1);
+            service.Create(account2);
+            service.Create(account3);
+
+            service.View();
+            Console.ReadLine();
+            service.Delete(account2);
+            BankAccount account4 = new BankAccount(0, "AlesyaNEW", "DzehachovaNEW", counter, 200, AccountType.Gold, 0);
+            service.Update(account4);
+
+            service.View();
             Console.ReadLine();
 
-            account1.Fill(1000);
-            account2.Fill(1000);
-            account3.Fill(1000);
-
-            Console.WriteLine(account1);
-            Console.WriteLine(account2);
-            Console.WriteLine(account3);
-            Console.ReadLine();
+            //account1.Fill(1000);
+            //account2.Fill(1000);
+            //account3.Fill(1000);
 
         }
     }

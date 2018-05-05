@@ -10,7 +10,6 @@ namespace BLL.ServiceImplementation
 {
     public class AccountService: IAccountService
     {
-        private List<BankAccount> accountsList;
         IStorage storage;
         AccountMapper mapper;
 
@@ -18,52 +17,34 @@ namespace BLL.ServiceImplementation
         {
             this.mapper = mapper;
             this.storage = storage;
-            accountsList = new List<BankAccount>();
-            Load();
         }
 
-        public void Add(BankAccount account)
+        public void Create(BankAccount account)
         {
-            if (ReferenceEquals(account, null))
-            {
-                throw new ArgumentNullException(nameof(account));
-            }
-            if (accountsList.Contains(account))
-                throw new Exception("This account is alrady exists");
-            else
-                accountsList.Add(account);
+            storage.Create(mapper.ToDTOAccount(account));
         }
 
-        public void Remove(BankAccount account)
+        public void Delete(BankAccount account)
         {
-            if (ReferenceEquals(account, null))
-            {
-                throw new ArgumentNullException(nameof(account));
-            }
-            if (accountsList.Contains(account))
-            {
-                accountsList.Remove(account);
-            }
-            else
-                throw new Exception("This account is alrady exists");
+            storage.Delete(mapper.ToDTOAccount(account));
         }
         
-        public void Load()
+        public void Update(BankAccount account)
         {
-           accountsList = storage.Load().Select(m => mapper.ToBankAccount(m)).ToList();
+            storage.Update(mapper.ToDTOAccount(account));
         }
 
-        public void Save()
+        public BankAccount Read(int id)
         {
-            storage.Save(accountsList.Select(m => mapper.ToDTOAccount(m)).ToList());
-            accountsList.Clear();
+            return mapper.ToBankAccount(storage.Read(id));
         }
         public void View()
         {
-            foreach (var item in accountsList)
+            foreach (var item in storage.GETLIST())
             {
-                Console.WriteLine(item);
+                Console.WriteLine(mapper.ToBankAccount(item));
             }
+            
         }
     }
 }

@@ -9,14 +9,10 @@ namespace BLL.Interfaces.Interface
 {
     public interface IAccountService
     {
-        void Add(BankAccount account);
-
-        void Remove(BankAccount account);
-
-        void Save();
-
+        void Create(BankAccount account);
+        BankAccount Read(int id);
+        void Update(BankAccount account);
+        void Delete(BankAccount account);
         void View();
-
-        void Load();
     }
 }

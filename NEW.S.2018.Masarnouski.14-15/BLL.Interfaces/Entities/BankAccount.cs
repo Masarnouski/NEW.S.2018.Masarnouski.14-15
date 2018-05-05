@@ -176,6 +176,18 @@ namespace BLL.Interfaces.Entities
             return $"id = {this.Id} , name = {this.HolderName}, surname = {HolderSurName}," +
                 $" balanse = {this.balance}, bonus points = {this.Bonus}";
         }
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+                throw new ArgumentNullException(nameof(obj));
+
+            if (this.GetType() != obj.GetType())
+                throw new ArgumentException($"{obj} has a wrong type");
+
+            BankAccount account = (BankAccount)obj;
+            return this.Id == account.Id && this.HolderName == account.HolderName && this.HolderSurName == account.HolderSurName;
+        }
         #endregion
     }
+
 }

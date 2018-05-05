@@ -4,16 +4,6 @@ namespace DAL.Interfaces.DTO
 {
     public class AccountDTO
     {
-        public AccountDTO() { }
-        public AccountDTO(int id, string holderName, string holderSurName,decimal balance, int bonus, int type)
-        {
-            this.Id = id;
-            this.HolderName = holderName;
-            this.HolderSurName = holderSurName;
-            this.Balance = balance;
-            this.Bonus = bonus;
-            this.Type = type;
-        }
         /// <summary>
         /// The identifier of the bank account.
         /// </summary>
