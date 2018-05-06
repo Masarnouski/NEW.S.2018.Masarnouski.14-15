@@ -3,6 +3,7 @@ using BLL.Interfaces.Interface;
 using BLL.Interfaces.Entities;
 using BLL.ServiceImplementation;
 using DAL.Interfaces.Interface;
+using DAL.Repositories;
 using DAL.Entity;
 
 namespace DependencyResolver

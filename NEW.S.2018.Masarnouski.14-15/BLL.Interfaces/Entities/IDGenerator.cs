@@ -9,7 +9,7 @@ namespace BLL.Interfaces.Entities
         int id;
         public IDGenerator()
         {
-            id = 0;
+            id = 1;
         }
 
         public IDGenerator(int id)

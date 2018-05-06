@@ -9,6 +9,7 @@ namespace DAL.Entity
     public class EntityStorage : IStorage
     {
         AccountDTOContext db = new AccountDTOContext();
+
         public void Create(AccountDTO account)
         {
             if (ReferenceEquals(account, null))
